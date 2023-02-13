@@ -1,0 +1,28 @@
+﻿<div style="margin-top:3rem"><strong>Type in the input (problem happens on keydown)</strong></div>
+<div>Case 1: Outside of a Modal in Index.razor (uncomment)</div>
+<ul>
+    <li>No rerendering of the wrapper component</li>
+    <li>No rerendering of the sbling component</li>
+</ul>
+<div>Case 2: Inside of a Modal in Index.razor (uncomment)</div>
+<ul>
+    <li>No rerendering of the wrapper component</li>
+    <li><u>Rendering</u> of the sbling component</li>
+</ul>
+
+<div>Key factors found</div>
+<ul>
+    <li>Test component needs to have a Parameter (object) - problem does not happen with primitive</li>
+    <li>The test input binding event is the default on blur</li>
+</ul>
+
+@code {
+    [Parameter]
+    public List<string> Param { get; set; }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("Test Component is Rendered!!!!");
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}

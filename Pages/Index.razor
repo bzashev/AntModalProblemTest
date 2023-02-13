@@ -1,0 +1,23 @@
+﻿@page "/"
+
+@*Test Outside modal*@
+@*<input @bind-value=@_test />
+<Test Param="@_param" />*@
+
+
+@*Test Inside modal*@
+<AntDesign.Modal Visible=true ConfirmLoading="false" Closable=false Keyboard=false>
+    <input @bind-value=@_test/>
+    <Test Param="@_param"/>
+</AntDesign.Modal>
+
+@code{
+    private long _test = 0;
+    private List<string> _param = new();
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("Component Wrapper is Rendered!!!!");
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}
